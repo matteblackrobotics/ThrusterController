@@ -3,7 +3,7 @@
 
 #include "OLED.h"
 #include "Pot.h"
-#include "PWM.h"
+#include "ESC.h"
 #include "LED.h"
 
 int mode = 1;
@@ -13,14 +13,12 @@ void setup()
 {
   Serial.begin(115200); delay(200);
   Serial.println();
-  Serial.println("ThrusterController.ino");
-  Serial.println("github: matteblackrobotics/MBR_Pot");
-  Serial.println("set pwm to middle of the pwm band to initiate BDCM");
-  setupOLED();
+  Serial.println("ThrusterController.ino"); delay(200);
+  Serial.println("github: matteblackrobotics/ThrusterController"); delay(200);
+  Serial.println("Attention: Pot to mid pwm for BDCM start"); delay(1000);
   setupLED();
-  displayFileName();
   setupPWM();
-  delay(1000);
+  setupOLED();
 }
 
 void loop() 
@@ -28,10 +26,13 @@ void loop()
   switch (mode)
   {
   case 1:
-    potRaw = pot1.readRaw();
-    pwm = map(potRaw, potRawMin, potRawMax, pwmMin, pwmMax);
-    potNorm = map(potRaw, potRawMin, potRawMax, potNormMin,potNormMax);
+    // ------------- input ------------ //
+    potRaw = pot1.readRaw();  // read potentiometer raw values
+    pwm = map(potRaw, potRawMin, potRawMax, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
+    potNorm = map(potRaw, potRawMin, potRawMax, potNormMin, potNormMax); // map raw potentiometer to normalized values
 
+    // --------------- process ----------- //
+    // check against motor deadband, set direction, set led brightness
     if(pwm > pwmMaxDeadband){
       state = "Forward";
       int g = map(pwm, pwmMaxDeadband, pwmMax, ledMin, ledMax);
@@ -53,8 +54,14 @@ void loop()
       ledDisplay = r;
     }
 
+    // ------------ output ----------- //
+    // LED
     ledStrip1.show();
+
+    // ESC and Thruster Motor
     writePWM();
+
+    // OLED
     display1.clearDisplay();
     display1.setCursor(0,0);
     display1.print("% = "); display1.print(potNorm);
@@ -63,6 +70,7 @@ void loop()
     display1.print("led = "); display1.println(ledDisplay);
     display1.display();
 
+    // Serial Monitor
     Serial.print("  potNorm = "); Serial.print(potNorm);
     Serial.print("  state = "); Serial.print(state);
     Serial.print("  pwm = "); Serial.print(pwm);
@@ -73,5 +81,4 @@ void loop()
   default:
   break;
   }
- 
 }

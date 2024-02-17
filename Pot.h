@@ -1,3 +1,8 @@
+/*
+Potentiometer (Pot)
+MBR_Pot.h library at https://github.com/matteblackrobotics/MBR_Pot
+*/
+
 #ifndef Pot_h
 #define Pot_h
 
