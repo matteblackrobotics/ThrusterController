@@ -13,7 +13,7 @@ extern float signalDamper;
 
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 23 // OLED display height, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
 
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 // The pins for I2C are defined by the Wire-library. 
@@ -44,18 +44,25 @@ void setupOLED()
   display1.println("ThrusterController.ino");
   display1.display();
   delay(500);
+
   display1.clearDisplay();
   display1.setCursor(0,0);
   display1.println("github: matteblackrobotics/ThrusterController");
   display1.display();
   delay(500);
+  
   display1.clearDisplay();
   display1.setCursor(0,0);
-  display1.println(BDCMname);
-  display1.print("signalDamper = "); display1.println(signalDamper);
-  display1.println("pot to mid pwm for BDCM start");
+  display1.println("Pot to mid pwm...");
+  display1.println("for BDCM start.");
   display1.display();
   delay(2000);
+
+  display1.clearDisplay();
+  display1.setCursor((SCREEN_WIDTH/2)-28, (SCREEN_HEIGHT/2) - 5);
+  display1.println("fuck yea");
+  display1.display();
+  delay(50);
 }
 
 

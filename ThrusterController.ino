@@ -64,10 +64,12 @@ void loop()
     // OLED
     display1.clearDisplay();
     display1.setCursor(0,0);
+    display1.println(BDCMname);
     display1.print("% = "); display1.print(potNorm);
     display1.print(", "); display1.println(state);
-    display1.print("pwm = "); display1.println(pwm);
-    display1.print("led = "); display1.println(ledDisplay);
+    display1.print("pwm = "); display1.print(pwm);
+    display1.print(", "); display1.println(signalDamper);
+
     display1.display();
 
     // Serial Monitor

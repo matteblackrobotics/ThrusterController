@@ -58,6 +58,7 @@ void printBDCMSelect(){
     Serial.println(BDCMname);
     Serial.print("pwmMin = "); Serial.println(pwmMin);
     Serial.print("pwmMax = "); Serial.println(pwmMax);
+    Serial.print("pwmMid = "); Serial.println(pwmMid);
     Serial.print("pwmMinDeadband = "); Serial.println(pwmMinDeadband);
     Serial.print("pwmMaxDeadband = "); Serial.println(pwmMaxDeadband);
     Serial.print("signalDamper = "); Serial.println(signalDamper);
