@@ -43,13 +43,13 @@ void setupOLED()
   display1.setCursor(0,0);
   display1.println("ThrusterController.ino");
   display1.display();
-  delay(500);
+  delay(750);
 
   display1.clearDisplay();
   display1.setCursor(0,0);
   display1.println("github: matteblackrobotics/ThrusterController");
   display1.display();
-  delay(500);
+  delay(750);
   
   display1.clearDisplay();
   display1.setCursor(0,0);
@@ -60,9 +60,11 @@ void setupOLED()
 
   display1.clearDisplay();
   display1.setCursor((SCREEN_WIDTH/2)-28, (SCREEN_HEIGHT/2) - 5);
-  display1.println("fuck yea");
+  display1.println("tight");
   display1.display();
-  delay(50);
+  delay(500);
+  display1.clearDisplay();
+  display1.display();
 }
 
 

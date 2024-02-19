@@ -28,7 +28,7 @@ int pwmMaxLimit;    // limits signal to motor based off power damper
 
 void BDCMselect(){
     if(BDCM == 1){
-        BDCMname = "BDCM_GOOLRC";
+        BDCMname = "BDCM_GoolRC";
         pwmMin = 1000;
         pwmMax = 2000;
         pwmMinDeadband = ((pwmMax+pwmMin)/2)-10;
@@ -55,7 +55,7 @@ void writePWM(){
 
 void printBDCMSelect(){
     Serial.println();
-    Serial.println(BDCMname);
+    Serial.print("BDCM = ");Serial.println(BDCMname);
     Serial.print("pwmMin = "); Serial.println(pwmMin);
     Serial.print("pwmMax = "); Serial.println(pwmMax);
     Serial.print("pwmMid = "); Serial.println(pwmMid);
@@ -64,7 +64,7 @@ void printBDCMSelect(){
     Serial.print("signalDamper = "); Serial.println(signalDamper);
     Serial.print("pwmMinLimit = "); Serial.println(pwmMinLimit);
     Serial.print("pwmMaxLimit = "); Serial.println(pwmMaxLimit);
-    delay(2000);
+    delay(1000);
     Serial.println();
     Serial.println();
 }

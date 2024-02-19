@@ -5,6 +5,7 @@
 #include "Pot.h"
 #include "ESC.h"
 #include "LED.h"
+#include "CurrentSensor.h"
 
 int mode = 1;
 String state;
@@ -19,6 +20,8 @@ void setup()
   setupLED();
   setupPWM();
   setupOLED();
+  setupCurrentSensor();
+
 }
 
 void loop() 
@@ -30,6 +33,7 @@ void loop()
     potRaw = pot1.readRaw();  // read potentiometer raw values
     pwm = map(potRaw, potRawMin, potRawMax, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
     potNorm = map(potRaw, potRawMin, potRawMax, potNormMin, potNormMax); // map raw potentiometer to normalized values
+    readCurrentSensor();
 
     // --------------- process ----------- //
     // check against motor deadband, set direction, set led brightness
@@ -69,6 +73,8 @@ void loop()
     display1.print(", "); display1.println(state);
     display1.print("pwm = "); display1.print(pwm);
     display1.print(", "); display1.println(signalDamper);
+    display1.print("A = "); display1.print(motorAmps);
+    display1.print(", W = "); display1.print(motorWatts);
 
     display1.display();
 
@@ -77,6 +83,8 @@ void loop()
     Serial.print("  state = "); Serial.print(state);
     Serial.print("  pwm = "); Serial.print(pwm);
     Serial.print("  led = "); Serial.print(ledDisplay);
+    Serial.print("  A = "); Serial.print(motorAmps);
+    Serial.print("  W = "); Serial.print(motorWatts);
     Serial.println();
   break;
   
