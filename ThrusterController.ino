@@ -47,23 +47,23 @@ void loop()
     // check against motor deadband, set direction, set led brightness
     if(pwm > pwmMaxDeadband){
       motorState = "Forward";
-      int g = map(pwm, pwmMaxDeadband, pwmMax, ledMin, ledMax);
-      ledStrip1.setPixelColor(0,0,g,0); // map pwm to green
-      ledDisplay = g;
+      int green = map(pwm, pwmMaxDeadband, pwmMax, ledMin, ledMax);
+      ledStrip1.setPixelColor(0,0,green,0); // map pwm to green
+      ledDisplay = green;
     }
 
     else if(pwm < pwmMinDeadband){
       motorState = "Reverse";
-      int b = map(pwm, pwmMaxDeadband, pwmMin, ledMin, ledMax);
-      ledStrip1.setPixelColor(0,0,0,b); // map pwm to blue
-      ledDisplay = b;
+      int blue = map(pwm, pwmMaxDeadband, pwmMin, ledMin, ledMax);
+      ledStrip1.setPixelColor(0,0,0,blue); // map pwm to blue
+      ledDisplay = blue;
     }
 
     else{
       motorState = "Stop";
-      int r = ledMin;
-      ledStrip1.setPixelColor(0,r,0,0);
-      ledDisplay = r;
+      int red = ledMin;
+      ledStrip1.setPixelColor(0,red,0,0);
+      ledDisplay = red;
     }
 
     // ------------ output ----------- //

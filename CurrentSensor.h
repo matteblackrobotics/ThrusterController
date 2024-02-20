@@ -1,5 +1,3 @@
-// the local header file handles the library and contains project specific, sensor specific code
-
 #ifndef CurrentSensor_h
 #define CurrentSensor_h
 
@@ -31,13 +29,12 @@ float mARaw;
 float vOffset = Vcc/2.0;
 
 MBR_MovingAverage currentSensorAvg(20);
-
 ACS712  currentSensor(currentSensorPin, 5.0, 1023, 185);
 
 //  ESP 32 example (might requires resistors to step down the logic voltage)
 //  ACS712  ACS(25, 3.3, 4095, 185);
 
-// setup current sensor
+// setupCurrentSensor
 void setupCurrentSensor(){
     Serial.println("current Sensor: ACS712");
     pinMode(currentSensorPin, INPUT);
@@ -67,12 +64,7 @@ int checkMin(){
     return currentMin;
 }
 
-
-float readvRaw(){
-    vRaw = analogRead(A0) * (5.0/1023.0);
-    return vRaw;
-}
-
+// readCurrentSensor
 void readCurrentSensor(){
   mA = currentSensor.mA_DC();               // read current
   mA = bound(mA, currentMin, currentMax);    // bound
