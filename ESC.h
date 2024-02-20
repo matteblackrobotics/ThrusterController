@@ -13,8 +13,9 @@ Servo ESC;
 // BDCM Selector
 int BDCM = 1; // 1 = GOOLRC, 2 = BlueRobotics
 String BDCMname;
+String motorState;
 
-int pwmPin = 2;
+int pwmPin = 4;
 int pwm;    // PWM signal value
 int pwmMin; // min possible PWM signal
 int pwmMax; // max possible PWM signal

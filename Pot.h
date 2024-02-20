@@ -8,7 +8,7 @@ MBR_Pot.h library at https://github.com/matteblackrobotics/MBR_Pot
 
 #include <MBR_Pot.h>
 
-MBR_Pot pot1(6,5.00);
+MBR_Pot pot1(A5,5.00);
 
 int potRaw;
 int potRawMin = 0;

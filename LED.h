@@ -2,7 +2,7 @@
 #define LED_h
 
 #include <Adafruit_NeoPixel.h>
-#define ledPin 3
+#define ledPin 5
 #define numLeds 1
 
 int ledIndex = 0;

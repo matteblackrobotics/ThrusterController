@@ -12,7 +12,7 @@
 //  ACS712 30A uses  66 mV per A
 
 // ACS712(uint8_t analogPin, float volts = 5.0, uint16_t maxADC = 1023, float mVperAmpere = 100);
-const int currentSensorPin = A3;
+const int currentSensorPin = A4;
 int currentMin = 0; // mA
 int currentMax = 10000;
 int mA; // current mA

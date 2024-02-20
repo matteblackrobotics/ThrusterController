@@ -1,7 +1,6 @@
 {
-    "port": "/dev/tty.usbserial-14120",
-    "configuration": "cpu=atmega328",
-    "board": "arduino:avr:nano",
+    "port": "/dev/tty.usbmodem141101",
+    "board": "arduino:avr:micro",
     "programmer": "avrisp",
     "sketch": "ThrusterController.ino"
 }
