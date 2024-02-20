@@ -10,9 +10,9 @@ int R; // [0:255]
 int G;
 int B;
 
-int ledMin = 20;
-int ledMax = 255;
-int ledDisplay;
+int ledMin = 20;    // brightness min
+int ledMax = 255;   // brightness max
+int ledDisplay;     // value to display brightness of color that is on
 
 // int brightness;
 Adafruit_NeoPixel ledStrip1(numLeds, ledPin, NEO_GRB + NEO_KHZ800);
