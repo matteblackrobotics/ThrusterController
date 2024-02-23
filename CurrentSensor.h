@@ -9,7 +9,7 @@
 //  ACS712 20A uses 100 mV per A
 //  ACS712 30A uses  66 mV per A
 int currentSensorSelect = 1; // 1 = 5A, 2 = 20A
-String currentSensorName = "ACS712 20A";
+String currentSensorName = "ACS712-20A";
 float mVperA = 100;
 
 // doesn't work, class instance compiles first and doesn't read mVperA in time

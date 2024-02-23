@@ -3,7 +3,7 @@ Blue robotics thruster controller
 Matt Pfeiffer 24.02.17
 
 Notes:
-- Must reset micro at right time to upload WFT
+- Must reset micro at right time to upload WTF
 - Depower Nano then upload new code
 */
 
@@ -14,7 +14,7 @@ Notes:
 #include "CurrentSensor.h"
 
 String fileName = "ThrusterController.ino";
-String boardType = "Micro";
+String boardType = "Arduino_Micro";
 String gitHub = "github: matteblackrobotics/ThrusterController";
 int mode = 1;
 
@@ -54,7 +54,7 @@ void loop()
 
     else if(pwm < pwmMinDeadband){
       motorState = "Reverse";
-      int blue = map(pwm, pwmMaxDeadband, pwmMin, ledMin, ledMax);
+      int blue = map(pwm, pwmMin, pwmMinDeadband, ledMax, ledMin);
       ledStrip1.setPixelColor(0,0,0,blue); // map pwm to blue
       ledDisplay = blue;
     }
@@ -62,6 +62,13 @@ void loop()
     else{
       motorState = "Stop";
       int red = ledMin;
+      ledStrip1.setPixelColor(0,red,0,0);
+      ledDisplay = red;
+    }
+
+    if(pwm == pwmMid){
+      motorState = "STOP";
+      int red = ledMax;
       ledStrip1.setPixelColor(0,red,0,0);
       ledDisplay = red;
     }

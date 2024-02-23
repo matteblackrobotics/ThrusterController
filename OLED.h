@@ -35,6 +35,10 @@ extern String gitHub;
 Adafruit_SSD1306 display1(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
+// chart OLED
+char actualThickness;
+OLED_SSD1306_Chart display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
 void setupOLED()
 {
   display1.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
@@ -71,5 +75,20 @@ void setupOLED()
   display1.display();
 }
 
+void displayChart(){
+  display1.setChartCoordinates(0, 60);      //Chart lower left coordinates (X, Y)
+  display1.setChartWidthAndHeight(123, 55); //Chart width = 123 and height = 60
+  display1.setXIncrement(5);                //Distance between Y points will be 5px
+  display1.setYLimits(50, 100);             //Ymin = 0 and Ymax = 100
+  display1.setYLimitLabels("50", "100");    //Setting Y axis labels
+  display1.setYLabelsVisible(true);
+  display1.setAxisDivisionsInc(12, 6);    //Each 12 px a division will be painted in X axis and each 6px in Y axis
+  display1.setPlotMode(SINGLE_PLOT_MODE); //Set single plot mode
+  // display.setPointGeometry(POINT_GEOMETRY_CIRCLE);
+  actualThickness = NORMAL_LINE;
+  display1.setLineThickness(actualThickness);
+  display1.drawChart(); //Update the buffer to draw the cartesian chart
+  display1.display();
+}
 
 #endif
