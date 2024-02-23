@@ -23,6 +23,7 @@
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_GFX_Library",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_BusIO",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_SSD1306",
+                "/Users/matthewpfeiffer/Documents/Arduino/libraries/OLED_SSD1306_Chart/src",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/MBR_Pot",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Servo/src",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_NeoPixel",
