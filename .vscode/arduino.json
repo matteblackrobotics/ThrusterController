@@ -1,5 +1,5 @@
 {
-    "port": "/dev/tty.usbmodem141101",
+    "port": "/dev/tty.usbmodem14201",
     "board": "arduino:avr:micro",
     "programmer": "avrisp",
     "sketch": "ThrusterController.ino"

@@ -28,8 +28,8 @@ void setup()
   Serial.println("Attention: Pot to mid pwm for BDCM start"); delay(1000);
   setupLED();  
   setupPWM();
-  setupOLED();
   setupCurrentSensor();
+  setupOLED();
 }
 
 void loop() 

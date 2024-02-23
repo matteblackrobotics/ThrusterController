@@ -11,7 +11,7 @@ Signal goes to ESC to control power to thruster Brushless DC Motor (BDCM)
 Servo ESC;
 
 // BDCM Selector
-int BDCM = 1; // 1 = GOOLRC, 2 = BlueRobotics
+int BDCM = 2; // 1 = GOOLRC, 2 = BlueRobotics
 String BDCMname;
 String motorState;
 
@@ -23,15 +23,16 @@ int pwmMid; // middle pwm signal
 int pwmMinDeadband; // bottom of deadband
 int pwmMaxDeadband; // top of deadband
 
-float signalDamper = .1; // power damping factor
+float signalDamper; // power damping factor
 int pwmMinLimit;    // limits signal to motor based off power damper
 int pwmMaxLimit;    // limits signal to motor based off power damper
 
-void BDCMselect(){
+void BDCMselector(){
     if(BDCM == 1){
         BDCMname = "BDCM_GoolRC";
         pwmMin = 1000;
         pwmMax = 2000;
+        signalDamper = .1;
         pwmMinDeadband = ((pwmMax+pwmMin)/2)-10;
         pwmMaxDeadband = ((pwmMax+pwmMin)/2)+10;
     }
@@ -39,8 +40,9 @@ void BDCMselect(){
         BDCMname = "BDCM_BlueRobotics";
         pwmMin = 1100;
         pwmMax = 1900;
-        pwmMinDeadband = 1460;
-        pwmMaxDeadband = 1540;
+        pwmMinDeadband = 1490;
+        pwmMaxDeadband = 1510;
+        signalDamper = .5;
     }
     // sets damper on signal to motor
     pwmMid = (pwmMax+pwmMin)/2;
@@ -54,7 +56,7 @@ void writePWM(){
     //ESC.write(pwm);
 }
 
-void printBDCMSelect(){
+void printBDCMSelector(){
     Serial.println();
     Serial.print("BDCM = ");Serial.println(BDCMname);
     Serial.print("pwmMin = "); Serial.println(pwmMin);
@@ -73,8 +75,8 @@ void printBDCMSelect(){
 void setupPWM(){
     pinMode(pwmPin, OUTPUT);
     ESC.attach(pwmPin, pwmMin, pwmMax);
-    BDCMselect();
-    printBDCMSelect();
+    BDCMselector();
+    printBDCMSelector();
     //Serial.println("setupServo");
 }
 

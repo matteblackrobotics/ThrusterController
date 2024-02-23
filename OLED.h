@@ -12,6 +12,7 @@
 extern String BDCMname;
 extern float signalDamper;
 extern String boardType;
+extern String currentSensorName;
 extern String fileName;
 extern String gitHub;
 
@@ -43,8 +44,10 @@ void setupOLED()
   display1.setCursor(0,0);
   display1.println(fileName);
   display1.println(boardType);
+  display1.println(currentSensorName);
+  display1.println(BDCMname);
   display1.display();
-  delay(1000);
+  delay(2000);
 
   display1.clearDisplay();
   display1.setCursor(0,0);
