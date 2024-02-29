@@ -5,6 +5,7 @@ Matt Pfeiffer 24.02.17
 Notes:
 - Must reset micro at right time to upload WTF
 - Depower Nano then upload new code
+- Make sure autoMidpoint for current sensor reads 511, 9-bit max
 */
 
 #include "OLED.h"
@@ -30,6 +31,11 @@ void setup()
   setupPWM();
   setupCurrentSensor();
   setupOLED();
+
+  display1.print("autoMidpoint mA = ");
+  display1.println(currentSensor.getMidPoint());
+  display1.display();
+  delay(1000);
 }
 
 void loop() 
@@ -39,8 +45,8 @@ void loop()
   case 1:
     // ------------- input ------------ //
     potRaw = pot1.readRaw();  // read potentiometer raw values
-    pwm = map(potRaw, potRawMin, potRawMax, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
-    potNorm = map(potRaw, potRawMin, potRawMax, potNormMin, potNormMax); // map raw potentiometer to normalized values
+    pwm = map(potRaw, potRawMax, potRawMin, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
+    potNorm = map(potRaw, potRawMax, potRawMin, potNormMin, potNormMax); // map raw potentiometer to normalized values
     readCurrentSensor();
 
     // --------------- process ----------- //

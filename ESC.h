@@ -42,7 +42,7 @@ void BDCMselector(){
         pwmMax = 1900;
         pwmMinDeadband = 1490;
         pwmMaxDeadband = 1510;
-        signalDamper = .5;
+        signalDamper = 1;
     }
     // sets damper on signal to motor
     pwmMid = (pwmMax+pwmMin)/2;

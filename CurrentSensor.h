@@ -8,7 +8,7 @@
 //  ACS712 5A  uses 185 mV per A
 //  ACS712 20A uses 100 mV per A
 //  ACS712 30A uses  66 mV per A
-int currentSensorSelect = 1; // 1 = 5A, 2 = 20A
+int currentSensorSelect = 2; // 1 = 5A, 2 = 20A
 String currentSensorName = "ACS712-20A";
 float mVperA = 100;
 
@@ -47,7 +47,7 @@ float vAdjust; // remove 2.5v
 float mARaw;
 float vOffset = Vcc/2.0;
 
-MBR_MovingAverage currentSensorAvg(20);
+MBR_MovingAverage currentSensorAvg(30);
 ACS712  currentSensor(currentSensorPin, 5.0, 1023, mVperA);
 
 //  ESP 32 example (might requires resistors to step down the logic voltage)
