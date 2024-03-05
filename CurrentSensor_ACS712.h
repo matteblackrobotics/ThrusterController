@@ -2,7 +2,7 @@
 #define CurrentSensor_ACS712_h
 
 #include <ACS712.h> // referencing documents/Arduino/library
-#include <MBR_MovingAverage.h>
+#include <MBR_MovingAverage.h> // https://github.com/matteblackrobotics/MBR_MovingAverage
 
 //  Arduino UNO has 5.0 volt with a max ADC value of 1023 steps
 //  ACS712 5A  uses 185 mV per A

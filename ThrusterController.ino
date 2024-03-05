@@ -26,7 +26,6 @@ potRaw
 BDCM_mA;
 BDCM_watts;
 BDCM_volts;
-
 */
 
 #include "OLED.h"
@@ -35,7 +34,6 @@ BDCM_volts;
 #include "LED.h"
 #include "CurrentSensor_ACS712.h"
 #include "CurrentSensor_INA260.h"
-
 
 String fileName = "ThrusterController.ino";
 String boardType = "Arduino_Micro";
