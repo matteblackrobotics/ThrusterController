@@ -1,5 +1,5 @@
-#ifndef CurrentSensor_h
-#define CurrentSensor_h
+#ifndef CurrentSensor_ACS712_h
+#define CurrentSensor_ACS712_h
 
 #include <ACS712.h> // referencing documents/Arduino/library
 #include <MBR_MovingAverage.h>
@@ -10,6 +10,7 @@
 //  ACS712 30A uses  66 mV per A
 int currentSensorSelect = 2; // 1 = 5A, 2 = 20A
 String currentSensorName = "ACS712-20A";
+int currentSensorPin = A4;
 float mVperA = 100;
 
 // doesn't work, class instance compiles first and doesn't read mVperA in time
@@ -29,18 +30,16 @@ void currentSensorSelector(){
 
 
 // ACS712(uint8_t analogPin, float volts = 5.0, uint16_t maxADC = 1023, float mVperAmpere = 100);
-const int currentSensorPin = A4;
 int currentMin = 0; // mA
 int currentMax = 10000;
 int mA; // current mA
 
-// BDCM
+// Power Sensor Stuff
 float motorAmps;
-float motorVolts = 12.0;
+float motorVolts;
 float motorWatts;
 
 // raw
-// voltage decreases when current increases
 float Vcc = 5.0;
 float vRaw;
 float vAdjust; // remove 2.5v
@@ -54,7 +53,7 @@ ACS712  currentSensor(currentSensorPin, 5.0, 1023, mVperA);
 //  ACS712  ACS(25, 3.3, 4095, 185);
 
 // setupCurrentSensor
-void setupCurrentSensor(){
+void setupCurrentSensor_ACS712(){
     Serial.print("currentSensorName = "); Serial.println(currentSensorName);
     Serial.print("mVperA = "); Serial.println(mVperA);
     pinMode(currentSensorPin, INPUT);
@@ -78,8 +77,9 @@ int checkMin(){
     return currentMin;
 }
 
+
 // readCurrentSensor
-void readCurrentSensor(){
+void readCurrentSensor_ACS712(){
   mA = currentSensor.mA_DC();               // read current
   mA = bound(mA, currentMin, currentMax);    // bound
   mA = currentSensorAvg.movingAverage(mA);  // find moving average

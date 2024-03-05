@@ -6,18 +6,41 @@ Notes:
 - Must reset micro at right time to upload WTF
 - Depower Nano then upload new code
 - Make sure autoMidpoint for current sensor reads 511, 9-bit max
+
+Update:
+- Reorganize for new sensor and bring global veriables forward to main file
+
+
+Global Variable:
+
+OLED
+Pot
+ESC
+LED
+CurrentSensor_ACS
+CurrenSensor_INA
+
+pwm;
+damper;
+potRaw
+BDCM_mA;
+BDCM_watts;
+BDCM_volts;
+
 */
 
 #include "OLED.h"
 #include "Pot.h"
 #include "ESC.h"
 #include "LED.h"
-#include "CurrentSensor.h"
+#include "CurrentSensor_ACS712.h"
+#include "CurrentSensor_INA260.h"
+
 
 String fileName = "ThrusterController.ino";
 String boardType = "Arduino_Micro";
 String gitHub = "github: matteblackrobotics/ThrusterController";
-int mode = 1;
+int mode = 1; // default mode 1
 
 void setup() 
 {
@@ -29,7 +52,7 @@ void setup()
   Serial.println("Attention: Pot to mid pwm for BDCM start"); delay(1000);
   setupLED();  
   setupPWM();
-  setupCurrentSensor();
+  setupCurrentSensor_ACS712();
   setupOLED();
 
   display1.print("autoMidpoint mA = ");
@@ -47,7 +70,9 @@ void loop()
     potRaw = pot1.readRaw();  // read potentiometer raw values
     pwm = map(potRaw, potRawMax, potRawMin, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
     potNorm = map(potRaw, potRawMax, potRawMin, potNormMin, potNormMax); // map raw potentiometer to normalized values
-    readCurrentSensor();
+    readCurrentSensor_ACS712();
+    // read_INA260();
+
 
     // --------------- process ----------- //
     // check against motor deadband, set direction, set led brightness
