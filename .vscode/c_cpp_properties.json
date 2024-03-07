@@ -18,6 +18,7 @@
             "includePath": [
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/variants/micro",
+                "/Users/matthewpfeiffer/Documents/Arduino/libraries/Arduino-MemoryFree-master",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_GFX_Library",
@@ -27,9 +28,8 @@
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/MBR_Pot",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Servo/src",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_NeoPixel",
-                "/Users/matthewpfeiffer/Documents/Arduino/libraries/ACS712",
-                "/Users/matthewpfeiffer/Documents/Arduino/libraries/MBR_MovingAverage",
                 "/Users/matthewpfeiffer/Documents/Arduino/libraries/Adafruit_INA260-master",
+                "/Users/matthewpfeiffer/Documents/Arduino/libraries/MBR_MovingAverage",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include-fixed",
                 "/Users/matthewpfeiffer/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include"

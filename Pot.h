@@ -1,12 +1,11 @@
 /*
 Potentiometer (Pot)
-MBR_Pot.h library at https://github.com/matteblackrobotics/MBR_Pot
 */
 
 #ifndef Pot_h
 #define Pot_h
 
-#include <MBR_Pot.h>
+#include <MBR_Pot.h> // https://github.com/matteblackrobotics/MBR_Pot
 
 MBR_Pot pot1(A5,5.00);
 

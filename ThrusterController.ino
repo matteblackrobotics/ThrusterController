@@ -26,16 +26,15 @@ potRaw
 BDCM_mA;
 BDCM_watts;
 BDCM_volts;
-
 */
+
+#include <MemoryFree.h> // library to check instantanious RAM
 
 #include "OLED.h"
 #include "Pot.h"
 #include "ESC.h"
 #include "LED.h"
-#include "CurrentSensor_ACS712.h"
 #include "CurrentSensor_INA260.h"
-
 
 String fileName = "ThrusterController.ino";
 String boardType = "Arduino_Micro";
@@ -46,18 +45,18 @@ void setup()
 {
   Serial.begin(115200); delay(200);
   Serial.println();
-  Serial.println("ThrusterController.ino");
-  Serial.println("Arduino Micro"); delay(200);
-  Serial.println("github: matteblackrobotics/ThrusterController"); delay(200);
-  Serial.println("Attention: Pot to mid pwm for BDCM start"); delay(1000);
+  Serial.println(F("ThrusterController.ino"));
+  //   Serial.println(F("Arduino Micro")); delay(200);
+  Serial.println(F("github: matteblackrobotics/ThrusterController")); delay(200);
+  Serial.println(F("Pot to mid pwm for BDCM start")); delay(1000);
   setupLED();  
   setupPWM();
-  setupCurrentSensor_ACS712();
+  //setupCurrentSensor_ACS712();
+  //display1.print(F("autoMidpoint mA = "));
+  //display1.println(currentSensor.getMidPoint());
+  //display1.display();
   setupOLED();
-
-  display1.print("autoMidpoint mA = ");
-  display1.println(currentSensor.getMidPoint());
-  display1.display();
+  setupINA260();
   delay(1000);
 }
 
@@ -68,23 +67,24 @@ void loop()
   case 1:
     // ------------- input ------------ //
     potRaw = pot1.readRaw();  // read potentiometer raw values
-    pwm = map(potRaw, potRawMax, potRawMin, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
-    potNorm = map(potRaw, potRawMax, potRawMin, potNormMin, potNormMax); // map raw potentiometer to normalized values
-    readCurrentSensor_ACS712();
-    // read_INA260();
+    pwm = map(potRaw, potRawMin, potRawMax, pwmMinLimit, pwmMaxLimit);  // map potentiometer to pwm signal for ESC for thruster motor
+    potNorm = map(potRaw, potRawMin, potRawMax, potNormMin, potNormMax); // map raw potentiometer to normalized values
+    //readCurrentSensor_ACS712();
+    //read_INA260();
+    read_INA260_MovingAverage();
 
 
     // --------------- process ----------- //
     // check against motor deadband, set direction, set led brightness
     if(pwm > pwmMaxDeadband){
-      motorState = "Forward";
+      motorState = "FWD";
       int green = map(pwm, pwmMaxDeadband, pwmMax, ledMin, ledMax);
       ledStrip1.setPixelColor(0,0,green,0); // map pwm to green
       ledDisplay = green;
     }
 
     else if(pwm < pwmMinDeadband){
-      motorState = "Reverse";
+      motorState = "REV";
       int blue = map(pwm, pwmMin, pwmMinDeadband, ledMax, ledMin);
       ledStrip1.setPixelColor(0,0,0,blue); // map pwm to blue
       ledDisplay = blue;
@@ -114,22 +114,28 @@ void loop()
     // OLED
     display1.clearDisplay();
     display1.setCursor(0,0);
-    display1.println(BDCMname);
-    display1.print("% = "); display1.print(potNorm);
-    display1.print(", "); display1.println(motorState);
-    display1.print("pwm = "); display1.print(pwm);
-    display1.print(", "); display1.println(signalDamper);
-    display1.print("A = "); display1.print(motorAmps);
-    display1.print(", W = "); display1.print(motorWatts);
+    // display1.println(BDCMname);
+    display1.print(F("% = ")); display1.print(potNorm);
+    display1.print(F(", ")); display1.println(motorState);
+    display1.print(F("pwm = ")); display1.println(pwm);
+    //display1.print(F("damper = ")); display1.println(signalDamper);
+    display1.print(F("V = ")); display1.println(INA_voltage);
+    display1.print(F("A = ")); display1.println(INA_current);
+    display1.print(F("W = ")); display1.println(INA_power);
     display1.display();
 
     // Serial Monitor
-    Serial.print("  potNorm = "); Serial.print(potNorm);
-    Serial.print("  motorState = "); Serial.print(motorState);
-    Serial.print("  pwm = "); Serial.print(pwm);
-    Serial.print("  led = "); Serial.print(ledDisplay);
-    Serial.print("  A = "); Serial.print(motorAmps);
-    Serial.print("  W = "); Serial.print(motorWatts);
+    Serial.print(F("  potNorm = ")); Serial.print(potNorm); 
+    Serial.print(F("  motorState = ")); Serial.print(motorState);
+    Serial.print(F("  led = ")); Serial.print(ledDisplay);
+    Serial.print(F("  V = ")); Serial.print(INA_voltage);
+    Serial.print(F("  A = ")); Serial.print(INA_current);
+    Serial.print(F("  W = ")); Serial.print(INA_power);
+    Serial.print(F("  free RAM (bytes) = ")); Serial.print(freeMemory(), DEC);
+    
+    
+    //Serial.print("  A = "); Serial.print(motorAmps);
+    //Serial.print("  W = "); Serial.print(motorWatts);
     Serial.println();
   break;
   
