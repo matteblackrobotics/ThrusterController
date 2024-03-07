@@ -5,9 +5,9 @@
 
 Adafruit_INA260 ina260 = Adafruit_INA260();
 String powerSensorName = "INA260";
-float INA_voltage;
-float INA_current;
-float INA_power;
+float INA_voltage; // [V]
+float INA_current;  // [A]
+float INA_power;  // [W]
 
 
 // moving average
@@ -44,12 +44,17 @@ void read_INA260(){
   INA_current /= (float)counter;
   INA_voltage /= (float)counter;
   INA_power /= (float)counter;
+
+  // convert from mUnits
+  INA_current = INA_current / 1000.0;
+  INA_voltage = INA_voltage / 1000.0;
+  INA_power = INA_power / 1000.0;
 }
 
 void read_INA260_MovingAverage(){
-  INA_current = avgCurrent.movingAverage(ina260.readCurrent());
-  INA_voltage = avgVoltage.movingAverage(ina260.readBusVoltage());
-  INA_power = avgPower.movingAverage(ina260.readPower());
+  INA_current = avgCurrent.movingAverage(ina260.readCurrent()/ 1000.0);
+  INA_voltage = avgVoltage.movingAverage(ina260.readBusVoltage()/ 1000.0);
+  INA_power = avgPower.movingAverage(ina260.readPower()/ 1000.0);
 }
 
 #endif

@@ -46,19 +46,15 @@ void setup()
   Serial.begin(115200); delay(200);
   Serial.println();
   Serial.println(F("ThrusterController.ino"));
-  Serial.println(F("Arduino Micro")); delay(200);
+  //   Serial.println(F("Arduino Micro")); delay(200);
   Serial.println(F("github: matteblackrobotics/ThrusterController")); delay(200);
-  Serial.println(F("Attention: Pot to mid pwm for BDCM start")); delay(1000);
+  Serial.println(F("Pot to mid pwm for BDCM start")); delay(1000);
   setupLED();  
   setupPWM();
-  
-
-
   //setupCurrentSensor_ACS712();
   //display1.print(F("autoMidpoint mA = "));
   //display1.println(currentSensor.getMidPoint());
   //display1.display();
-  
   setupOLED();
   setupINA260();
   delay(1000);
@@ -81,14 +77,14 @@ void loop()
     // --------------- process ----------- //
     // check against motor deadband, set direction, set led brightness
     if(pwm > pwmMaxDeadband){
-      motorState = "Forward";
+      motorState = "FWD";
       int green = map(pwm, pwmMaxDeadband, pwmMax, ledMin, ledMax);
       ledStrip1.setPixelColor(0,0,green,0); // map pwm to green
       ledDisplay = green;
     }
 
     else if(pwm < pwmMinDeadband){
-      motorState = "Reverse";
+      motorState = "REV";
       int blue = map(pwm, pwmMin, pwmMinDeadband, ledMax, ledMin);
       ledStrip1.setPixelColor(0,0,0,blue); // map pwm to blue
       ledDisplay = blue;
@@ -118,7 +114,7 @@ void loop()
     // OLED
     display1.clearDisplay();
     display1.setCursor(0,0);
-    //display1.println(BDCMname);
+    // display1.println(BDCMname);
     display1.print(F("% = ")); display1.print(potNorm);
     display1.print(F(", ")); display1.println(motorState);
     display1.print(F("pwm = ")); display1.println(pwm);
