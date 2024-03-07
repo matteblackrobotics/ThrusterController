@@ -13,7 +13,7 @@
 extern String BDCMname;
 extern float signalDamper;
 extern String boardType;
-extern String currentSensorName;
+// extern String currentSensorName;
 extern String fileName;
 extern String gitHub;
 
@@ -44,7 +44,7 @@ void setupOLED()
   display1.setCursor(0,0);
   display1.println(fileName);
   display1.println(boardType);
-  display1.println(currentSensorName);
+  //display1.println(currentSensorName);
   display1.println(BDCMname);
   display1.display();
   delay(2000);
@@ -57,14 +57,14 @@ void setupOLED()
   
   display1.clearDisplay();
   display1.setCursor(0,0);
-  display1.println("Pot to mid pwm...");
-  display1.println("for BDCM start.");
+  display1.println(F("Pot to mid pwm..."));
+  display1.println(F("for BDCM start."));
   display1.display();
   delay(2000);
 
   display1.clearDisplay();
   display1.setCursor((SCREEN_WIDTH/2)-28, (SCREEN_HEIGHT/2) - 5);
-  display1.println("nice");
+  display1.println(F("nice"));
   display1.display();
   delay(500);
   display1.clearDisplay();
