@@ -32,17 +32,17 @@ void BDCMselector(){
         BDCMname = "BDCM_GoolRC";
         pwmMin = 1000;
         pwmMax = 2000;
-        signalDamper = .1;
-        pwmMinDeadband = ((pwmMax+pwmMin)/2)-10;
-        pwmMaxDeadband = ((pwmMax+pwmMin)/2)+10;
+        pwmMinDeadband = ((pwmMax+pwmMin)/2)-10; // generates a upper limit for deadband
+        pwmMaxDeadband = ((pwmMax+pwmMin)/2)+10; // generates lower limit for deadband
+        signalDamper = .1;  // multiplier that sets the PWM limit to increase resoultion of pot [0.0:1.0]
     }
     else if(BDCM == 2){
         BDCMname = "BDCM_BlueRobotics";
         pwmMin = 1100;
         pwmMax = 1900;
-        pwmMinDeadband = 1490;
-        pwmMaxDeadband = 1510;
-        signalDamper = 1;
+        pwmMinDeadband = 1490;  // from data sheet
+        pwmMaxDeadband = 1510;  // from data sheet
+        signalDamper = 1;       // // multiplier that sets the PWM limit to increase resoultion of pot [0.0:1.0]
     }
     // sets damper on signal to motor
     pwmMid = (pwmMax+pwmMin)/2;
@@ -58,15 +58,15 @@ void writePWM(){
 
 void printBDCMSelector(){
     Serial.println();
-    Serial.print("BDCM = ");Serial.println(BDCMname);
-    Serial.print("pwmMin = "); Serial.println(pwmMin);
-    Serial.print("pwmMax = "); Serial.println(pwmMax);
-    Serial.print("pwmMid = "); Serial.println(pwmMid);
-    Serial.print("pwmMinDeadband = "); Serial.println(pwmMinDeadband);
-    Serial.print("pwmMaxDeadband = "); Serial.println(pwmMaxDeadband);
-    Serial.print("signalDamper = "); Serial.println(signalDamper);
-    Serial.print("pwmMinLimit = "); Serial.println(pwmMinLimit);
-    Serial.print("pwmMaxLimit = "); Serial.println(pwmMaxLimit);
+    Serial.print(F("BDCM = "));Serial.println(BDCMname);
+    Serial.print(F("pwmMin = ")); Serial.println(pwmMin);
+    Serial.print(F("pwmMax = ")); Serial.println(pwmMax);
+    Serial.print(F("pwmMid = ")); Serial.println(pwmMid);
+    Serial.print(F("pwmMinDeadband = ")); Serial.println(pwmMinDeadband);
+    Serial.print(F("pwmMaxDeadband = ")); Serial.println(pwmMaxDeadband);
+    Serial.print(F("signalDamper = ")); Serial.println(signalDamper);
+    Serial.print(F("pwmMinLimit = ")); Serial.println(pwmMinLimit);
+    Serial.print(F("pwmMaxLimit = ")); Serial.println(pwmMaxLimit);
     delay(1000);
     Serial.println();
     Serial.println();

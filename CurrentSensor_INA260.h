@@ -52,9 +52,9 @@ void read_INA260(){
 }
 
 void read_INA260_MovingAverage(){
-  INA_current = avgCurrent.movingAverage(ina260.readCurrent()/ 1000.0);
-  INA_voltage = avgVoltage.movingAverage(ina260.readBusVoltage()/ 1000.0);
-  INA_power = avgPower.movingAverage(ina260.readPower()/ 1000.0);
+  INA_current = avgCurrent.movingAverage(ina260.readCurrent())/ 1000.0; // divide after
+  INA_voltage = avgVoltage.movingAverage(ina260.readBusVoltage())/ 1000.0;  // divide after
+  INA_power = avgPower.movingAverage(ina260.readPower()/ 1000.0); // divide before moving average
 }
 
 #endif

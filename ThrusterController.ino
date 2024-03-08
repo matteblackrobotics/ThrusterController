@@ -1,6 +1,6 @@
 /*
 Blue robotics thruster controller
-Matt Pfeiffer 24.02.17
+Matt Pfeiffer - 24.03.08
 
 Notes:
 - Must reset micro at right time to upload WTF
@@ -9,10 +9,9 @@ Notes:
 
 Update:
 - Reorganize for new sensor and bring global veriables forward to main file
-
+- Delete ServoMotor.h file
 
 Global Variable:
-
 OLED
 Pot
 ESC
